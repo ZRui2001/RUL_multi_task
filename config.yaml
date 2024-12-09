@@ -1,0 +1,245 @@
+# 数据配置
+data:
+  CALCE:
+    data_dir: data/CALCE/
+    data_path: data/CALCE/CALCE.csv
+    rated_capacity: 1.1
+    failure_threshold: 0.7
+    val_bat: 
+    test_bat: CS2_35
+    bats: [CS2_35, CS2_36, CS2_37, CS2_38]
+
+    # 默认使用该参数创造样本, 若各模型窗口不一致时使用其内部的seq_length
+    seq_length: 64 
+  NASA:
+    data_dir: data/NASA/
+    data_path: data/NASA/NASA.csv
+    rated_capacity: 2.0
+    failure_threshold: 0.7
+    val_bat: 
+    test_bat: B0005
+    bats: [B0005, B0006, B0007, B0018]
+
+    # 默认使用该参数创造样本, 若各模型窗口不一致时使用其内部的seq_length
+    seq_length: 16
+
+# 模型配置
+models:
+  lstm:
+    name: lstm
+
+    seq_length: 64
+
+    # 网络参数
+    input_size: 1
+    hidden_sizes: [50, 100]
+    output_size: 1
+    dropout: 0.8
+
+    # 训练
+    optimizer: rmsprop
+    loss: mse
+    metric: re
+    epochs: 100
+    batch_size: 32
+    lr: 0.001
+    alpha: 0.99  # 优化器的超参数
+
+  gru:
+    name: gru
+
+    seq_length: 64
+
+    # 网络参数
+    input_size: 1
+    hidden_size: 64
+    output_size: 1
+    num_layers: 4
+    dropout: 0.5
+
+    # 训练
+    optimizer: adam
+    loss: mse
+    metric: re
+    epochs: 100
+    batch_size: 32
+    lr: 0.001
+
+  det:
+    name: det
+
+    # 网络参数
+    # feature_size: 64  # seq_length
+    hidden_dim: 16
+    feature_num: 16  # 只有容量的话,重复feature_num次
+    num_layers: 3
+    nhead: 1
+    dropout: 0.001
+    noise_level: 0.01
+    alpha: 0.1  # 正则化系数
+
+    # 训练
+    optimizer: adam
+    loss: mse
+    metric: re
+    epochs: 100
+    batch_size: 32
+    lr: 0.001
+
+  model_v1:
+    name: model_v1
+
+    # 网络参数
+    input_dim: 1
+    model_dim: 16
+    num_heads: 1
+    num_layers: 3
+    output_dim: 1
+    dropout: 0.1
+
+    # 训练
+    optimizer: adam
+    loss: mse
+    metric: re
+    epochs: 100
+    batch_size: 32
+    lr: 0.001
+
+  model_v2:
+    name: model_v2
+
+    # 网络参数
+    input_dim: 1
+    model_dim: 16
+    num_heads: 1
+    num_layers: 3
+    output_dim: 1
+    dropout: 0.1
+
+    # 训练
+    optimizer: adam
+    loss: mse
+    metric: re
+    epochs: 100
+    batch_size: 32
+    lr: 0.001
+
+  model_v2_1:
+    name: model_v2_1
+
+    # 网络参数
+    input_dim: 1
+    model_dim: 16
+    num_heads: 1
+    num_layers: 3
+    output_dim: 1
+    dropout: 0.1
+
+    # 训练
+    optimizer: adam
+    loss: mse
+    metric: re
+    epochs: 100
+    batch_size: 32
+    lr: 0.001
+  
+  model_v2_2:
+    name: model_v2_2
+
+    # 网络参数
+    input_dim: 1
+    model_dim: 16
+    num_heads: 1
+    num_layers: 3
+    output_dim: 1
+    dropout: 0.1
+
+    # 训练
+    optimizer: adam
+    loss: mse
+    metric: re
+    epochs: 100
+    batch_size: 32
+    lr: 0.001
+
+  model_v3:
+    name: model_v3
+
+    # 网络参数
+    input_dim: 1
+    model_dim: 16
+    num_heads: 1
+    num_layers: 3
+    output_dim: 1
+    dropout: 0.1
+
+    # 训练
+    optimizer: adam
+    loss: mse
+    metric: re
+    epochs: 100
+    batch_size: 32
+    lr: 0.001
+
+  model_v4:
+    name: model_v4
+
+    # 网络参数
+    input_dim: 1
+    model_dim: 16
+    num_heads: 1
+    num_layers: 3
+    output_dim: 1
+    dropout: 0.1
+
+    # 训练
+    optimizer: adam
+    loss: mse
+    metric: re
+    epochs: 100
+    batch_size: 32
+    lr: 0.001
+  
+  model_v4_1:
+    name: model_v4_1
+
+    # 网络参数
+    input_dim: 1
+    model_dim: 16
+    num_heads: 1
+    num_layers: 3
+    output_dim: 1
+    dropout: 0.1
+
+    # 训练
+    optimizer: adam
+    loss: mse
+    metric: re
+    epochs: 100
+    batch_size: 32
+    lr: 0.001
+  
+  model_v5:
+    name: model_v5
+
+    # 网络参数
+    input_dim: 1
+    model_dim: 16
+    num_heads: 1
+    num_layers: 3
+    output_dim: 1
+    dropout: 0.1
+
+    # 训练
+    optimizer: adam
+    loss: mse
+    metric: re
+    epochs: 100
+    batch_size: 32
+    lr: 0.001
+
+# 其他配置
+start_points: [0.0, 0.3, 0.5, 0.7]
+model_save_dir: saved_models/
+device: cuda:0
+seeds: [42, 123, 2024, 7, 99]
