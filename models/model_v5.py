@@ -7,7 +7,7 @@ import torch.nn as nn
 import math
 
 class model_v5(nn.Module):
-    def __init__(self, input_dim, model_dim, num_heads, num_layers, output_dim, dropout=0.1, **kwargs):
+    def __init__(self, input_dim, model_dim, num_heads, num_layers, pred_len, dropout=0.1, **kwargs):
         """
         带因果注意力的 Transformer 模型。
         """
@@ -21,46 +21,47 @@ class model_v5(nn.Module):
             d_model=model_dim, 
             nhead=num_heads, 
             dim_feedforward=model_dim * 4, 
-            dropout=dropout
+            dropout=dropout,
+            batch_first=True
         )
         self.encoder = nn.TransformerEncoder(encoder_layer, num_layers=num_layers)
         
         # 输出层
-        self.fc_out = nn.Linear(model_dim, output_dim)
+        self.fc_soh = nn.Linear(model_dim, pred_len)
+        self.fc_rul = nn.Linear(model_dim, 1)
 
     def forward(self, x):
         """
         参数:
-        - x: 输入张量，形状为 (batch_size, seq_length, input_dim)
+        - x: 输入张量，形状为 (batch_size, lookback_len, 1)
         
         返回:
-        - 预测值，形状为 (batch_size, output_dim)
+        - soh_pred，形状为 (batch_size, pred_len)
+        - rul_pred，形状为 (batch_size,)
         """
-        batch_size, seq_length, _ = x.shape
+        batch_size, lookback_len, _ = x.shape
         device = x.device
 
         # 输入嵌入与位置编码
-        x = self.input_embedding(x)  # (batch_size, seq_length, model_dim)
+        x = self.input_embedding(x)  # (batch_size, lookback_len, model_dim)
         
         # 动态位置编码
-        position = torch.arange(seq_length).unsqueeze(0).repeat(batch_size, 1).float() / seq_length
-        position = position.unsqueeze(2).to(x.device)  # (batch_size, seq_length, 1)
-        x = torch.cat([x, position], dim=2)  # (batch_size, seq_length, model_dim)
-        
-        # 转换为 Transformer 的输入格式 (seq_length, batch_size, model_dim)
-        x = x.permute(1, 0, 2)
+        position = torch.arange(lookback_len).unsqueeze(0).repeat(batch_size, 1).float() / lookback_len
+        position = position.unsqueeze(2).to(x.device)  # (batch_size, lookback_len, 1)
+        x = torch.cat([x, position], dim=2)  # (batch_size, lookback_len, model_dim)
 
         # 因果注意力掩码
-        causal_mask = generate_causal_mask(seq_len=seq_length, device=device)  # (seq_length, seq_length)
+        causal_mask = generate_causal_mask(seq_len=lookback_len, device=device)  # (lookback_len, lookback_len)
 
         # Transformer 编码器
         x = self.encoder(x, mask=causal_mask)  # mask 参数应用因果掩码
         
         # 取最后一个时间步的输出
-        x = x[-1]  # (batch_size, model_dim)
+        x = x[:, -1, :].squeeze(1)  # (batch_size, model_dim)
         
         # 输出预测
-        return self.fc_out(x)  # (batch_size, output_dim)
+        return self.fc_soh(x), self.fc_rul(x).squeeze(-1)  # (batch_size, pred_len), (batch_size,)
+
     
 def generate_causal_mask(seq_len, device):
     """

@@ -66,7 +66,7 @@ class PositionalEncoding(nn.Module):
     
 
 class DeTransformer(nn.Module):
-    def __init__(self, feature_size=64, hidden_dim=32, feature_num=1, num_layers=1, nhead=1, dropout=0.0, noise_level=0.01, **kwargs):
+    def __init__(self, feature_size, pred_len, hidden_dim=32, feature_num=1, num_layers=1, nhead=1, dropout=0.0, noise_level=0.01, **kwargs):
         '''
         Args:
             feature_size: the feature size of input data (required).
@@ -91,7 +91,8 @@ class DeTransformer(nn.Module):
             encoder_layers = nn.TransformerEncoderLayer(d_model=feature_num, nhead=nhead, dim_feedforward=hidden_dim, dropout=dropout, batch_first=True)
         self.cell = nn.TransformerEncoder(encoder_layers, num_layers=num_layers)
         
-        self.linear = nn.Linear(feature_num*self.auto_hidden, 1)
+        self.fc_soh = nn.Linear(feature_num*self.auto_hidden, pred_len)
+        self.fc_rul = nn.Linear(feature_num*self.auto_hidden, 1)
         self.autoencoder = Autoencoder(input_size=feature_size, hidden_dim=self.auto_hidden, noise_level=noise_level)
  
     def forward(self, x): 
@@ -102,6 +103,7 @@ class DeTransformer(nn.Module):
         out = self.pos(out)
         out = self.cell(out)              # single feature: (batch_size, feature_num, auto_hidden) or multi-features: (batch_size, auto_hidden, feature_num)
         out = out.reshape(batch_size, -1) # (batch_size, feature_num*auto_hidden)
-        out = self.linear(out)            # out shape: (batch_size, 1)
+        soh_pred = self.fc_soh(out)            # out shape: (batch_size, 1)
+        rul_pred = self.fc_rul(out)
         
-        return out, decode
+        return soh_pred, rul_pred.squeeze(-1), decode
