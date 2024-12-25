@@ -5,30 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="34272766-1bc3-4068-923e-0d025c5e4542" name="Changes" comment="Init commit (mac)">
-      <change afterPath="$PROJECT_DIR$/.idea/RUL_multi_task.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/CALCE_raw.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/NASA_raw.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/model_v6.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocess.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/saved_models/NASA/model_v6_s-1.pth" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/train.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/config_loader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/CALCE.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/CALCE.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/NASA.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/NASA.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_preprocess.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_preprocess.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/DeTransformer.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/DeTransformer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/GRU.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/GRU.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LSTM.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/LSTM.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/model_v5.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/model_v5.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/raw_to_csv.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train_and_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/train_util.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train_test.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/train.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,23 +45,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/zrui/PycharmProjects/RUL_multi_task&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.stylelint&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.general&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Live/PycharmProjects/RUL_multi_task",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.stylelint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.stylelint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "editor.preferences.completion",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -119,6 +99,7 @@
       <workItem from="1733886654976" duration="701000" />
       <workItem from="1733887574657" duration="102446000" />
       <workItem from="1735003807972" duration="13607000" />
+      <workItem from="1735023579471" duration="21248000" />
     </task>
     <task id="LOCAL-00001" summary="Init commit (mac)">
       <option name="closed" value="true" />
@@ -148,5 +129,16 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Init commit (mac)" />
     <option name="LAST_COMMIT_MESSAGE" value="Init commit (mac)" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/models/model_v6.py</url>
+          <line>33</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
