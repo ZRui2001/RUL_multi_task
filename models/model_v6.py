@@ -5,7 +5,7 @@ import math
 
 
 class model_v6(nn.Module):
-    def __init__(self, input_dim, model_dim, lookback_len, num_heads, num_layers, depth, kernel_size, pred_len, dropout=0.1, **kwargs):
+    def __init__(self, input_dim, model_dim, lookback_len, num_heads, num_heads_s, num_layers, depth, kernel_size, pred_len, dropout=0.1, **kwargs):
         super(model_v6, self).__init__()
         self.emb_t = nn.Linear(input_dim, model_dim - 1)
         self.emb_s = nn.Linear(input_dim, model_dim)
@@ -18,6 +18,7 @@ class model_v6(nn.Module):
                 model_dim=model_dim,
                 lookback_len=lookback_len,
                 num_heads=num_heads,
+                num_heads_s=num_heads_s,
                 kernel_size=kernel_size,
                 depth=depth,
                 dropout=dropout
@@ -98,10 +99,10 @@ class PositionalEncoding(nn.Module):
 
 
 class SpatiotemporalAttentionBlock(nn.Module):
-    def __init__(self, model_dim, lookback_len, num_heads, kernel_size, depth, dropout=0.1):
+    def __init__(self, model_dim, lookback_len, num_heads, num_heads_s, kernel_size, depth, dropout=0.1):
         super(SpatiotemporalAttentionBlock, self).__init__()
         self.dcmsa = DCMSABlock(model_dim=model_dim, num_heads=num_heads, kernel_size=kernel_size, depth=depth, dropout=dropout)
-        self.imsa = IMSA(lookback_len=lookback_len, num_heads=num_heads, dropout=dropout)
+        self.imsa = IMSA(lookback_len=lookback_len, num_heads=num_heads_s, dropout=dropout)
         self.caf = CrossAttentionFusion(model_dim=model_dim, num_heads=num_heads, dropout=dropout)
 
     def forward(self, x_t, x_s):
