@@ -173,7 +173,7 @@ def get_optimizer(optim_name, model, lr, rmsprop_alpha=None):
 #
 #     参数:
 #         actual_seq: Actual value sequence.
-#         pred_seqs (Dict): Prediction result dictionary, with the following structure:
+#         pred_seqs (Dict): Prediction param_search_res dictionary, with the following structure:
 #             - key (str): Name of model.
 #             - val (List): Prediction sequence, including actual values ahead start point.
 #     '''
