@@ -1,0 +1,2 @@
+lr,bs,model_dim,ks,depth,num_layers,num_heads,num_heads_s,alpha,val_bat,train_loss,val_loss,val_soh_rmse,val_rul_rmse,epochs,time_per_epoch
+0.0007,16,16,3,3,2,1,1,0.1,B0005,0.0012512556221779612,0.001224635268694588,0.01510903578195848,0.03466708727664382,59,0.8084252274364506
